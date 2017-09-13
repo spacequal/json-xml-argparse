@@ -1,0 +1,43 @@
+{
+	"toolname": {
+		"description": "Test input for the new argument parsing framework",
+		"input": [
+			{
+				"args":["ifile"],
+				"help":"Input Files",
+				"nargs":"+"
+			},
+			{
+				"args":["-x","--xcoord"],
+				"default":1,
+				"help":"X-Coordinate",
+				"type":"float"
+			},
+			{
+				"args":["-y","--ycoord"],
+				"default":2,
+				"help":"Y-Coordinate",
+				"type":"float"
+			}
+		]
+	},
+
+	"another_tool": {
+		"description": "Two tools need not concern you.  If it does seek help",
+		"input": [
+			{
+				"args":["-x", "--xcoord"],
+				"default":1,
+				"help":"X-Coordinate",
+				"type":"float"
+			},
+			{	
+				"args":["-z", "--zcoord"],
+				"default":2,
+				"help":"Z-Coordinate",
+				"type":"float"
+			}
+		]
+	}
+}
+

@@ -1,0 +1,3 @@
+[console_scripts]
+jx_print_args = jx_argparse.command_line:print_args
+

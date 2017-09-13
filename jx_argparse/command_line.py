@@ -1,0 +1,16 @@
+#-*-encoding=utf-8-*-
+'''
+Sample Console Scripts for the JX-Argument Parsing Framework
+'''
+
+from __future__ import absolute_import, division, print_function, unicode_literals
+import pkg_resources as rsc
+import jx_argparse as jx
+
+#####################################################################
+
+@jx.jargs(rsc.resource_filename(__name__,'resources/argdef_example.json'), 'toolname')
+def print_args(*argv, **kargs):
+	print(argv)
+	print(kargs)
+

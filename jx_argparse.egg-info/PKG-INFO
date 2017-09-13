@@ -1,0 +1,20 @@
+Metadata-Version: 1.2
+Name: jx-argparse
+Version: 0.0.0.dev0
+Summary: 
+Console script argument parsing framework for JSON/XML for increased 
+standardization and reusability of command line argument schema.
+
+Home-page: UNKNOWN
+Author: Branden Allen
+Author-email: ballen@cfa.harvard.edu
+License: BSD
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=2.7
