@@ -1,6 +1,8 @@
 {
 	"toolname": {
-		"description": "Test input for the new argument parsing framework",
+		"description": "resources/description_example.txt",
+		"isfile":"False",
+		"resource_name":"jx_argparse",
 		"input": [
 			{
 				"args":["ifile"],
@@ -24,6 +26,8 @@
 
 	"another_tool": {
 		"description": "Two tools need not concern you.  If it does seek help",
+		"isfile":"False",
+		"resource_name":"None",
 		"input": [
 			{
 				"args":["-x", "--xcoord"],

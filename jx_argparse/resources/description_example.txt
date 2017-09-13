@@ -1,0 +1,5 @@
+Test resource description for use in evaluation
+of the new parsing framework.
+
+It is full of stars.
+

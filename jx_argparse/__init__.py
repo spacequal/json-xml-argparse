@@ -4,6 +4,7 @@ Argument Parsing Framework for JSON-XML
 '''
 from __future__ import absolute_import, division, print_function, unicode_literals
 import json, argparse, inspect, sys
+import pkg_resources as rsc
 
 #####################################################################
 eval_list= [
@@ -20,7 +21,15 @@ def jargs(argdef, argset_name):
 	def jargs_dec(func):
 		with open(argdef) as f: jarg= json.load(f)
 		argset= jarg[argset_name]
-		parser= argparse.ArgumentParser(argset['description'])
+
+		if argset['isfile']== "True":
+			with open(argset['description']) as dfile: descr= dfile.read().strip()
+		elif argset['resource_name']!= "None": 
+			descr= rsc.resource_string(argset['resource_name'], argset['description'])
+		else:
+			descr= argset['description']
+
+		parser= argparse.ArgumentParser('\n'+descr+'\n\n')
 
 		#Keyword Arguments
 		for ii in argset['input']:
