@@ -1,5 +1,5 @@
 {
-	"toolname": {
+	"tool_with_resource_description": {
 		"description": "resources/description_example.txt",
 		"isfile":"False",
 		"resource_name":"jx_argparse",
@@ -24,11 +24,33 @@
 		]
 	},
 
-	"another_tool": {
+	"tool_with_str_description": {
 		"description": "Two tools need not concern you.  If it does seek help",
 		"isfile":"False",
 		"resource_name":"None",
 		"input": [
+			{
+				"args":["-x", "--xcoord"],
+				"default":1,
+				"help":"X-Coordinate",
+				"type":"float"
+			},
+			{	
+				"args":["-z", "--zcoord"],
+				"default":2,
+				"help":"Z-Coordinate",
+				"type":"float"
+			}
+		]
+	},
+
+	"tool_with_docstr_description": {
+		"input": [
+			{
+				"args":["ifile"],
+				"nargs":"+",
+				"help":"Input Files"
+			},
 			{
 				"args":["-x", "--xcoord"],
 				"default":1,

@@ -9,8 +9,11 @@ import jx_argparse as jx
 
 #####################################################################
 
-@jx.jargs(rsc.resource_filename(__name__,'resources/argdef_example.json'), 'toolname')
+@jx.jargs(rsc.resource_filename(__name__,'resources/argdef_example.json'), 'tool_with_docstr_description')
 def print_args(*argv, **kargs):
+	'''
+	This is my DOCSTRING
+	'''
 	print(argv)
 	print(kargs)
 

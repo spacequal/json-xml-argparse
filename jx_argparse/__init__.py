@@ -22,7 +22,9 @@ def jargs(argdef, argset_name):
 		with open(argdef) as f: jarg= json.load(f)
 		argset= jarg[argset_name]
 
-		if argset['isfile']== "True":
+		if 'isfile' not in argset or 'resource_name' not in argset:
+			descr= func.__doc__.strip()
+		elif argset['isfile']== "True":
 			with open(argset['description']) as dfile: descr= dfile.read().strip()
 		elif argset['resource_name']!= "None": 
 			descr= rsc.resource_string(argset['resource_name'], argset['description'])
