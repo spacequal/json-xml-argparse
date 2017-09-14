@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parser_list>
+	<parser name='tool_with_docstr_description'>
+		<arg args='ifile' nargs='+' type='str'>
+			<help>Input Files</help>
+		</arg>
+		<arg args='-x, --xcoord' default='1' type='float'>
+			<help>X-Coordinate</help>
+		</arg>
+		<arg args='-y, --ycoord' default='1' type='float'>
+			<help>Y-Coordinate</help>
+		</arg>
+		<arg args='-z' default= 10.0 type= 'float'/>
+	</parser>
+</parser_list>
