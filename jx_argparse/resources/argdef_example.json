@@ -3,7 +3,7 @@
 		"description": "resources/description_example.txt",
 		"isfile":"False",
 		"resource_name":"jx_argparse",
-		"input": [
+		"args": [
 			{
 				"args":["ifile"],
 				"help":"Input Files",
@@ -28,7 +28,7 @@
 		"description": "Two tools need not concern you.  If it does seek help",
 		"isfile":"False",
 		"resource_name":"None",
-		"input": [
+		"args": [
 			{
 				"args":["-x", "--xcoord"],
 				"default":1,
@@ -45,7 +45,7 @@
 	},
 
 	"tool_with_docstr_description": {
-		"input": [
+		"args": [
 			{
 				"args":["ifile"],
 				"nargs":"+",

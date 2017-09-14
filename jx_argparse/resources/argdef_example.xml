@@ -10,6 +10,6 @@
 		<arg args='-y, --ycoord' default='1' type='float'>
 			<help>Y-Coordinate</help>
 		</arg>
-		<arg args='-z' default= 10.0 type= 'float'/>
+		<arg args='-z' default='10.0' type='float'/>
 	</parser>
 </parser_list>
