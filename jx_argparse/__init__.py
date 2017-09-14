@@ -6,6 +6,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import json, argparse, inspect, sys
 import xml.etree.ElementTree as et
 import pkg_resources as rsc
+import re
 
 #####################################################################
 eval_list= [
@@ -24,11 +25,10 @@ def jargs(parser_list, parser):
 	parser: str
 		Name of the parser definition contained within the input file
 	'''
+	with open(parser_list) as f: jarg= json.load(f)
+	argset= jarg[parser]
 
 	def jargs_dec(func):
-		with open(argdef) as f: jarg= json.load(f)
-		argset= jarg[argset_name]
-
 		if 'isfile' not in argset or 'resource_name' not in argset:
 			descr= func.__doc__.strip()
 		elif argset['isfile']== "True":
@@ -38,7 +38,7 @@ def jargs(parser_list, parser):
 		else:
 			descr= argset['description']
 
-		parser= argparse.ArgumentParser('\n'+descr+'\n\n')
+		aparse= argparse.ArgumentParser('\n'+descr+'\n\n')
 
 		#Keyword Arguments
 		for ii in argset['args']:
@@ -49,11 +49,11 @@ def jargs(parser_list, parser):
 			kargs= ii
 
 			#Add arguments
-			parser.add_argument(*args, **kargs)
+			aparse.add_argument(*args, **kargs)
 
 		#Redefine function as a console script
 		def f_main():
-			pargs= vars(parser.parse_args())		
+			pargs= vars(aparse.parse_args())		
 
 			#Check for input arguments which are not contained in the function (TBD check option)
 #			aspec= inspect.getargspec(func)
@@ -87,17 +87,22 @@ def xargs(parser_list, parser):
 	def xargs_dec(func):
 		#XML Tree readout and location of the desired elements
 		descr= func.__doc__.strip()
-		parser= ArgumentParser('\n'+descr+'\n\n')
+		aparse= argparse.ArgumentParser('\n'+descr+'\n\n')
 		t= et.parse(parser_list)
-		for ii in t.findall(".//parser[@name='%s']"%parser):
+		matching_parser_list= t.findall(".//parser[@name='%s']"%parser)
+
+		#Append parser arguments
+		for ii in matching_parser_list[0]:
 			kargs= ii.attrib
-			args= kargs.pop('args').split(',')
-			for jj in ii: kargs[jj.name]= jj.text
+			args= re.split('\s+,\s+', kargs.pop('args'))
+			for jj in ii: kargs[jj.tag]= jj.text
 			for jj in kargs:
 				if jj in eval_list: kargs[jj]= eval(kargs[jj])
-			parser.add_argument(*args, **kargs)
+			aparse.add_argument(*args, **kargs)
+
+		#Form the console script function
 		def fout():
-			pargs= vars(parser.parse_args())
+			pargs= vars(aparse.parse_args())
 
 			#Function Return
 			return func(**pargs)
