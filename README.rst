@@ -65,7 +65,7 @@ To apply command line arguments defined in a XML file to a function ::
 		'''
 		... Something Wonderful ...
 
-The corresponding JSON file contains definitions for `ArgumentParser
+The corresponding XML file contains definitions for `ArgumentParser
 <https://docs.python.org/3/library/argparse.html>`_  argument definitions, cf. ::
 
 	<?xml version="1.0" encoding="UTF-8"?>
