@@ -16,7 +16,7 @@ To apply command line arguments defined in a JSON file to a function ::
 	
 	import jx_argparse as jx
 
-	@jx.jarg('parser_list.json', 'parser_name')
+	@jx.jargs('parser_list.json', 'parser_name')
 	def new_function(*args, **kargs):
 		'''
 		This is my function, there are many like it but this one is mine.
@@ -58,7 +58,7 @@ To apply command line arguments defined in a XML file to a function ::
 	
 	import jx_argparse as jx
 
-	@jx.xarg('parser_list.xml', 'parser_name')
+	@jx.xargs('parser_list.xml', 'parser_name')
 	def new_function(*args, **kargs):
 		'''
 		This is my function, there are many like it but this one is mine.
@@ -74,7 +74,7 @@ The corresponding XML file contains definitions for `ArgumentParser
 			<arg args='arg0' nargs='+'>
 				<help>ARG0 HELP</help>
 			</arg>
-			<arg args='-i, --input' default='ARG1_DEF' type='float'>
+			<arg args='-i, --input' default='ARG1_DEFAULT' type='float'>
 				<help>OPTIONAL ARG1 HELP</help>
 			</arg>
 		</parser>
