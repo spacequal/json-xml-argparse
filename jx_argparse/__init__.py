@@ -4,7 +4,9 @@ Argument Parsing Framework for JSON-XML
 '''
 from __future__ import absolute_import, division, print_function, unicode_literals
 import json, argparse, inspect, sys
+import xml.etree.ElementTree as et
 import pkg_resources as rsc
+import re
 
 #####################################################################
 eval_list= [
@@ -12,16 +14,21 @@ eval_list= [
 	'required'
 	]
 
-def jargs(argdef, argset_name):
+def jargs(parser_list, parser):
 	'''
-	Decorator for the application of JSON defined arguments to a
-	function for packaging as a console script.
+	Decorator for the addtion of command line input for a function defined in JSON files.
+
+	Parameters
+	----------
+	parser_list: str
+		Path to a JSON file containing parser definitions
+	parser: str
+		Name of the parser definition contained within the input file
 	'''
+	with open(parser_list) as f: jarg= json.load(f)
+	argset= jarg[parser]
 
 	def jargs_dec(func):
-		with open(argdef) as f: jarg= json.load(f)
-		argset= jarg[argset_name]
-
 		if 'isfile' not in argset or 'resource_name' not in argset:
 			descr= func.__doc__.strip()
 		elif argset['isfile']== "True":
@@ -31,10 +38,10 @@ def jargs(argdef, argset_name):
 		else:
 			descr= argset['description']
 
-		parser= argparse.ArgumentParser('\n'+descr+'\n\n')
+		aparse= argparse.ArgumentParser('\n'+descr+'\n\n')
 
 		#Keyword Arguments
-		for ii in argset['input']:
+		for ii in argset['args']:
 			#Enforce literally interpreted inputs
 			for key in ii:
 				if key in eval_list: ii[key]= eval(ii[key])
@@ -42,11 +49,11 @@ def jargs(argdef, argset_name):
 			kargs= ii
 
 			#Add arguments
-			parser.add_argument(*args, **kargs)
+			aparse.add_argument(*args, **kargs)
 
 		#Redefine function as a console script
 		def f_main():
-			pargs= vars(parser.parse_args())		
+			pargs= vars(aparse.parse_args())		
 
 			#Check for input arguments which are not contained in the function (TBD check option)
 #			aspec= inspect.getargspec(func)
@@ -64,4 +71,45 @@ def jargs(argdef, argset_name):
 
 	#Retrun the decorator
 	return jargs_dec
+
+def xargs(parser_list, parser):
+	'''
+	Decorator for the addtion of command line input for a function defined in XML files.
+
+	Parameters
+	----------
+	parser_list: str
+		Path to a XML file containing parser definitions
+	parser: str
+		Name of the parser definition contained within the input file
+	'''
+
+	def xargs_dec(func):
+		#XML Tree readout and location of the desired elements
+		descr= func.__doc__.strip()
+		aparse= argparse.ArgumentParser('\n'+descr+'\n\n')
+		t= et.parse(parser_list)
+		matching_parser_list= t.findall(".//parser[@name='%s']"%parser)
+
+		#Append parser arguments
+		for ii in matching_parser_list[0]:
+			kargs= ii.attrib
+			args= re.split('\s+,\s+', kargs.pop('args'))
+			for jj in ii: kargs[jj.tag]= jj.text
+			for jj in kargs:
+				if jj in eval_list: kargs[jj]= eval(kargs[jj])
+			aparse.add_argument(*args, **kargs)
+
+		#Form the console script function
+		def fout():
+			pargs= vars(aparse.parse_args())
+
+			#Function Return
+			return func(**pargs)
+
+		#Console script function
+		return fout
+
+	#Return decorator
+	return xargs_dec
 

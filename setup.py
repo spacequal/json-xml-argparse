@@ -10,7 +10,7 @@ from setuptools import setup, find_packages, Extension
 
 #####################################################################
 
-VERSION= '0.0.0dev'
+VERSION= '0.0.1dev'
 RELEASE= 'dev' not in VERSION
 
 classifiers= [
@@ -27,7 +27,8 @@ requirements = [
 ]
 
 console_scripts= [
-	'jx_print_args= jx_argparse.command_line  :  print_args',
+	'jx_print_args     = jx_argparse.command_line  :  print_args'  ,
+	'jx_xml_print_args = jx_argparse.command_line  :  xprint_args' ,
 ]
 
 entry_points= {

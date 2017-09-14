@@ -16,4 +16,12 @@ def print_args(*argv, **kargs):
 	'''
 	print(argv)
 	print(kargs)
+	
+@jx.xargs(rsc.resource_filename(__name__,'resources/argdef_example.xml'), 'tool_with_docstr_description')
+def xprint_args(*argv, **kargs):
+	'''
+	This is my XML DOCSTRING
+	'''
+	print(argv)
+	print(kargs)
 
