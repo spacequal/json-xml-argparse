@@ -32,8 +32,8 @@ The corresponding JSON file contains definitions for `ArgumentParser
 					"help":"Keyword Argument",
 					"type":"str"
 				}
-			}
-		]
+			]
+		}
 	}
 
 These may be used in conjunction with standalone scripts or as entry points resulting in a tool that
