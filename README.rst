@@ -74,7 +74,7 @@ The corresponding JSON file contains definitions for `ArgumentParser
 			<arg args='ARG0' nargs='+'>
 				<help>ARG0 HELP</help>
 			</arg>
-			<arg args='--ARG1, --ARGUMENT1' default='ARG1_DEF' type='float'>
+			<arg args='-ARG1, --ARGUMENT1' default='ARG1_DEF' type='float'>
 				<help>OPTIONAL ARG1 HELP</help>
 			</arg>
 		</parser>
