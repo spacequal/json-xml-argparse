@@ -27,8 +27,8 @@ The corresponding JSON file contains definitions for `ArgumentParser
 <https://docs.python.org/3/library/argparse.html>`_  argument definitions, cf. ::
 
 	{
-		"argset_name":{
-			"input":[
+		"parser_name":{
+			"args":[
 				{
 					"args":["arg0"],
 					"help":"Positional Argument"
@@ -71,10 +71,10 @@ The corresponding JSON file contains definitions for `ArgumentParser
 	<?xml version="1.0" encoding="UTF-8"?>
 	<parser_list>
 		<parser name='parser_name'>
-			<arg args='ARG0' nargs='+'>
+			<arg args='arg0' nargs='+'>
 				<help>ARG0 HELP</help>
 			</arg>
-			<arg args='-ARG1, --ARGUMENT1' default='ARG1_DEF' type='float'>
+			<arg args='-i, --input' default='ARG1_DEF' type='float'>
 				<help>OPTIONAL ARG1 HELP</help>
 			</arg>
 		</parser>
