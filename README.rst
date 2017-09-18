@@ -48,7 +48,7 @@ may be called from the command line, cf.::
 	./console_script ARG0 --input ARG1
 
 A working example may be found in ``jx_argparse/command_line.py`` with corresponding JSON argument
-definitions given in ``jx_argparse/argdef_example.json``.  After installation of this package the
+definitions given in ``jx_argparse/examples/argdef.json``.  After installation of this package the
 console script ``jx_print_args``, which executes the ``print_args`` function, is made available to
 the user.
 
@@ -87,8 +87,8 @@ may be called from the command line, cf.::
 	
 	./console_script ARG0 --input ARG1
 
-A working example may be found in ``jx_argparse/command_line.py`` with corresponding JSON argument
-definitions given in ``jx_argparse/argdef_example.xml``.  After installation of this package the
+A working example may be found in ``jx_argparse/command_line.py`` with corresponding XML argument
+definitions given in ``jx_argparse/examples/argdef.xml``.  After installation of this package the
 console script ``jx_print_xml_args``, which executes the ``xprint_args`` function, is made available to
 the user.
 
