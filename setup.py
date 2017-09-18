@@ -10,7 +10,7 @@ from setuptools import setup, find_packages, Extension
 
 #####################################################################
 
-VERSION= '0.0.1dev'
+VERSION= '0.0.2dev'
 RELEASE= 'dev' not in VERSION
 
 classifiers= [
@@ -38,7 +38,7 @@ entry_points= {
 #Setup
 setup(
 	name                  = 'jx-argparse'             ,
-	version               = '0.0.0dev'                ,
+	version               = VERSION                   ,
 	description           = __doc__                   ,
 
 	author                = 'Branden Allen'           ,

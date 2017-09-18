@@ -6,7 +6,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import json, argparse, inspect, sys
 import xml.etree.ElementTree as et
 import pkg_resources as rsc
-import re
+import re, types
 
 #####################################################################
 eval_list= [
@@ -20,36 +20,35 @@ def jargs(parser_list, parser):
 
 	Parameters
 	----------
-	parser_list: str
-		Path to a JSON file containing parser definitions
-	parser: str
+	parser_list: str or list
+		Path to a JSON file containing parser definitions.  If input as a list
+		it must match the shape of the input parser list.
+	parser: str or list
 		Name of the parser definition contained within the input file
 	'''
-	with open(parser_list) as f: jarg= json.load(f)
-	argset= jarg[parser]
+	if not isinstance(parser     , types.ListType): parser= [parser,]
+	if not isinstance(parser_list, types.ListType): parser_list= [parser_list,]
 
 	def jargs_dec(func):
-		if 'isfile' not in argset or 'resource_name' not in argset:
-			descr= func.__doc__.strip()
-		elif argset['isfile']== "True":
-			with open(argset['description']) as dfile: descr= dfile.read().strip()
-		elif argset['resource_name']!= "None": 
-			descr= rsc.resource_string(argset['resource_name'], argset['description'])
-		else:
-			descr= argset['description']
-
+		#JSON readout of command line definition blocks
+		descr= func.__doc__.strip()
 		aparse= argparse.ArgumentParser('\n'+descr+'\n\n')
 
-		#Keyword Arguments
-		for ii in argset['args']:
-			#Enforce literally interpreted inputs
-			for key in ii:
-				if key in eval_list: ii[key]= eval(ii[key])
-			args= ii.pop('args')
-			kargs= ii
+		for ii,jj in zip(parser_list, parser):
+			with open(ii) as f: jarg= json.load(f)
+			print(ii)
+			argset= jarg[jj]
 
-			#Add arguments
-			aparse.add_argument(*args, **kargs)
+			#Keyword Arguments
+			for kk in argset['args']:
+				#Enforce literally interpreted inputs
+				for key in kk:
+					if key in eval_list: kk[key]= eval(kk[key])
+				args= kk.pop('args')
+				kargs= kk
+
+				#Add arguments
+				aparse.add_argument(*args, **kargs)
 
 		#Redefine function as a console script
 		def f_main():
@@ -78,26 +77,32 @@ def xargs(parser_list, parser):
 
 	Parameters
 	----------
-	parser_list: str
+	parser_list: str or list
 		Path to a XML file containing parser definitions
-	parser: str
+	parser: str or list
 		Name of the parser definition contained within the input file
 	'''
+	if not isinstance(parser     , types.ListType): parser= [parser,]
+	if not isinstance(parser_list, types.ListType): parser_list= [parser_list,]
+
 	def xargs_dec(func):
-		#XML Tree readout and location of the desired elements
+		#XML Tree of command line definition blocks
 		descr= func.__doc__.strip()
 		aparse= argparse.ArgumentParser('\n'+descr+'\n\n')
-		t= et.parse(parser_list)
-		matching_parser_list= t.findall(".//parser[@name='%s']"%parser)
 
-		#Append parser arguments
-		for ii in matching_parser_list[0]:
-			kargs= ii.attrib
-			args= re.split('\s*?,\s*', kargs.pop('args'))
-			for jj in ii: kargs[jj.tag]= jj.text.strip()
-			for jj in kargs:
-				if jj in eval_list: kargs[jj]= eval(kargs[jj])
-			aparse.add_argument(*args, **kargs)
+		#Append all parser arguments from all input command line argument blocks
+		for ii,jj in zip(parser_list, parser):
+			t= et.parse(ii)
+			matching_parser_list= t.findall(".//parser[@name='%s']"%jj)
+
+			#Append parser arguments
+			for arg in matching_parser_list[0]:
+				kargs= arg.attrib
+				args= re.split('\s*?,\s*', kargs.pop('args'))
+				for kk in arg: kargs[kk.tag]= kk.text.strip()
+				for kk in kargs:
+					if kk in eval_list: kargs[kk]= eval(kargs[kk])
+				aparse.add_argument(*args, **kargs)
 
 		#Form the console script function
 		def fout():
