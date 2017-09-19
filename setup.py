@@ -33,6 +33,9 @@ entry_points= {
 	'console_scripts':console_scripts,
 }
 
+#Github repository
+url= 'https://github.com/spacequal/json-xml-argparse'
+
 #Setup
 setup(
 	name                  = 'jx-argparse'             ,
@@ -48,6 +51,7 @@ setup(
 	package_dir           = {}                        ,
 	packages              = find_packages()           ,
 	include_package_data  = True                      ,
+	url                   = url                       ,
 
 	install_requires      = requirements              ,
 	classifiers           = classifiers               ,
