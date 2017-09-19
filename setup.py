@@ -10,7 +10,7 @@ from setuptools import setup, find_packages, Extension
 
 #####################################################################
 
-VERSION= '0.0.1dev'
+VERSION= '0.0.1'   
 RELEASE= 'dev' not in VERSION
 
 classifiers= [
@@ -22,9 +22,7 @@ classifiers= [
 	'Topic :: Software Development :: Libraries :: Python Modules',
 ]
 
-requirements = [
-	'setuptools_git >= 0.3',
-]
+requirements = []
 
 console_scripts= [
 	'jx_print_args     = jx_argparse.command_line  :  print_args'  ,
@@ -38,7 +36,7 @@ entry_points= {
 #Setup
 setup(
 	name                  = 'jx-argparse'             ,
-	version               = '0.0.0dev'                ,
+	version               = VERSION                   ,
 	description           = __doc__                   ,
 
 	author                = 'Branden Allen'           ,
