@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 #-*-encoding=utf-8-*-
 '''
-Console script argument parsing framework for JSON/XML for increased 
-standardization and reusability of command line argument schema.
+Decorator based console script argument parsing framework for JSON/XML
+for increased standardization and reusability of command line argument
+definition blocks.
 '''
 
 #Distutils
