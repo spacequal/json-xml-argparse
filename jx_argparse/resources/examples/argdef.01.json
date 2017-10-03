@@ -1,0 +1,13 @@
+{
+	"tool_with_docstr_description": {
+		"args": [
+			{
+				"args":["-y", "--ycoord"],
+				"default":1,
+				"help":"X-Coordinate",
+				"type":"float"
+			}
+		]
+	}
+}
+

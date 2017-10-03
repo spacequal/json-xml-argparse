@@ -6,11 +6,13 @@ TBD
 -XML and JSON Command Block Validation
 -Common command definition block decorator for either JSON and XML to enable
  the mixing of definitions from either file type.
+-Unit test for stacked XML definitions.
 
 New Features
 ------------
 -Stacking of XML or JSON defined command lne blocks enabled.
 -Migration of example command line block definitions to ``resources/examples``.
+-Unit Test Framework Implemented
 
 0.0.1 (2017.09.14)
 ==================
