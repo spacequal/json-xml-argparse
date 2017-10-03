@@ -8,6 +8,9 @@ standardization and reusability of command line argument schema.
 #Distutils
 from setuptools import setup, find_packages, Extension
 
+#Unit Testing
+import unittest
+
 #####################################################################
 
 VERSION= '0.0.2dev'
@@ -57,5 +60,7 @@ setup(
 	python_requires       = '>=2.7'                   ,
 
 	entry_points          = entry_points              ,
+
+	test_suite            = 'jx_argparse.test'        ,
 )
 

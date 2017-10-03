@@ -3,10 +3,20 @@
 Argument Parsing Framework for JSON-XML
 '''
 from __future__ import absolute_import, division, print_function, unicode_literals
-import json, argparse, inspect, sys
+
+#XML/JSON Parsers
+import json, argparse
 import xml.etree.ElementTree as et
+
+#Resources
 import pkg_resources as rsc
+
+#Standard Packages
 import re, types
+import inspect, sys
+
+#Unit testing
+import unittest as ut
 
 #####################################################################
 eval_list= [
@@ -116,4 +126,3 @@ def xargs(parser_list, parser):
 
 	#Return decorator
 	return xargs_dec
-
