@@ -1,0 +1,24 @@
+{
+	"tool_with_docstr_description": {
+		"args": [
+			{
+				"args":["ifile"],
+				"nargs":"+",
+				"help":"Input Files"
+			},
+			{
+				"args":["-x", "--xcoord"],
+				"default":1,
+				"help":"X-Coordinate",
+				"type":"float"
+			},
+			{	
+				"args":["-z", "--zcoord"],
+				"default":2,
+				"help":"Z-Coordinate",
+				"type":"float"
+			}
+		]
+	}
+}
+

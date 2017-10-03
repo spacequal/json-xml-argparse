@@ -9,9 +9,12 @@ definition blocks.
 #Distutils
 from setuptools import setup, find_packages, Extension
 
+#Unit Testing
+import unittest
+
 #####################################################################
 
-VERSION= '0.0.1a'   
+VERSION= '0.0.2dev'
 RELEASE= 'dev' not in VERSION
 
 classifiers= [
@@ -60,5 +63,7 @@ setup(
 	python_requires       = '>=2.7'                   ,
 
 	entry_points          = entry_points              ,
+
+	test_suite            = 'jx_argparse.test'        ,
 )
 
