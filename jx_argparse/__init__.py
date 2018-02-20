@@ -46,7 +46,6 @@ def jargs(parser_list, parser):
 
 		for ii,jj in zip(parser_list, parser):
 			with open(ii) as f: jarg= json.load(f)
-			print(ii)
 			argset= jarg[jj]
 
 			#Keyword Arguments
