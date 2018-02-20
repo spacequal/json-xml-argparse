@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 #-*-encoding=utf-8-*-
-'''
-Decorator based console script argument parsing framework for JSON/XML
-for increased standardization and reusability of command line argument
-definition blocks.
-'''
+'Decorator based console script argument parsing framework for JSON/XML '\
+'for increased standardization and reusability of command line argument '\
+'definition blocks.'
 
 #Distutils
 from setuptools import setup, find_packages, Extension
