@@ -36,12 +36,19 @@ def jargs(parser_list, parser):
 	parser: str or list
 		Name of the parser definition contained within the input file
 	'''
-	if not isinstance(parser     , types.ListType): parser= [parser,]
-	if not isinstance(parser_list, types.ListType): parser_list= [parser_list,]
+	if 'ListType' in dir(types):
+		if not isinstance(parser     , types.ListType): parser= [parser,]
+		if not isinstance(parser_list, types.ListType): parser_list= [parser_list,]
+	else:
+		if not isinstance(parser     , list          ): parser= [parser,]
+		if not isinstance(parser_list, list          ): parser_list= [parser_list,]
 
 	def jargs_dec(func):
 		#JSON readout of command line definition blocks
-		descr= func.__doc__.strip()
+		try:
+			descr= func.__doc__.strip()
+		except:
+			descr= ''
 		aparse= argparse.ArgumentParser('\n'+descr+'\n\n')
 
 		for ii,jj in zip(parser_list, parser):
@@ -91,12 +98,19 @@ def xargs(parser_list, parser):
 	parser: str or list
 		Name of the parser definition contained within the input file
 	'''
-	if not isinstance(parser     , types.ListType): parser= [parser,]
-	if not isinstance(parser_list, types.ListType): parser_list= [parser_list,]
+	if 'ListType' in dir(types):
+		if not isinstance(parser     , types.ListType): parser= [parser,]
+		if not isinstance(parser_list, types.ListType): parser_list= [parser_list,]
+	else:
+		if not isinstance(parser     , list          ): parser= [parser,]
+		if not isinstance(parser_list, list          ): parser_list= [parser_list,]
 
 	def xargs_dec(func):
 		#XML Tree of command line definition blocks
-		descr= func.__doc__.strip()
+		try:
+			descr= func.__doc__.strip()
+		except:
+			descr= ''
 		aparse= argparse.ArgumentParser('\n'+descr+'\n\n')
 
 		#Append all parser arguments from all input command line argument blocks

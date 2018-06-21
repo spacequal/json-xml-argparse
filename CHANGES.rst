@@ -14,6 +14,10 @@ New Features
 -Migration of example command line block definitions to ``resources/examples``.
 -Unit Test Framework Implemented
 
+0.0.2 (2018.08.21)
+==================
+Python 3 Compatibility Upgrade
+
 0.0.1 (2017.09.14)
 ==================
 
