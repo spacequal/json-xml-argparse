@@ -12,7 +12,7 @@ import unittest
 
 #####################################################################
 
-VERSION= '0.0.2dev'
+VERSION= '0.0.3dev'
 RELEASE= 'dev' not in VERSION
 
 classifiers= [
